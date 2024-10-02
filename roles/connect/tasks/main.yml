@@ -15,4 +15,5 @@
 # If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
 - import_tasks: 10-users.hml
+  become: true
   delegate_to: localhost
