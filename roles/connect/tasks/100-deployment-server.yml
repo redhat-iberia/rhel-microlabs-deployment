@@ -1,0 +1,39 @@
+---
+
+# Copyright 2024 (c) José Ángel de Bustos Pérez 
+#   Author: José Ángel de Bustos Pérez <jadebustos@gmail.com>
+#
+# This file is part of the IdM workshop.
+#
+# IdM workshop is free software: you can redistribute it and/or modify it under the terms of 
+# the GNU General Public License v3 as published by the Free Software Foundation.
+# IdM workshop is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+# See the GNU General Public License v3 for more details.
+
+# You should have received a copy of the GNU General Public License v3 along with the IdM workshop. 
+# If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
+
+- name: create script for installation
+  ansible.builtin.template:
+    src: ipa-server-deploy.sh.j2
+    dest: /tmp/ipa-server-deploy.sh
+    mode: 0755
+  delegate_to: localhost
+
+- name: ipa server deployment
+  ansible.builtin.script:
+    cmd: /tmp/ipa-server-deploy.sh
+  register: deployment_log
+  ignore_errors: true
+
+- name: delete ipa server installation script
+  ansible.builtin.file:
+    path: /tmp/ipa-server-deploy.sh
+    state: absent  
+  delegate_to: localhost
+  ignore_errors:
+
+- name: deployment information
+  ansible.builtin.debug:
+    var: deployment_log

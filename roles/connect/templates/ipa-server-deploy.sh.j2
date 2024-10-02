@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Copyright 2024 (c) José Ángel de Bustos Pérez 
+#   Author: José Ángel de Bustos Pérez <jadebustos@gmail.com>
+#
+# This file is part of the IdM workshop.
+#
+# IdM workshop is free software: you can redistribute it and/or modify it under the terms of 
+# the GNU General Public License v3 as published by the Free Software Foundation.
+# IdM workshop is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+# See the GNU General Public License v3 for more details.
+
+# You should have received a copy of the GNU General Public License v3 along with the IdM workshop. 
+# If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
+
+umask 0022
+
+{% set arguments = ['--realm ' + realm, '--domain ' + domain, '--netbios-name ' + netbios,'--ds-password ' + ds_password, '--admin-password ' + admin_password, '--mkhomedir', '--no-ntp', '--hostname ' + ansible_fqdn, '--ssh-trust-dns', '--idstart ' + idstart, '--idmax ' + idmax,'--unattended'] %}
+
+{% if ipa_dns == true %}
+  {% set tmp = arguments.append('--setup-dns --forwarder ' + forwarder + ' --reverse-zone ' + reverse_zone) %}                  
+{% endif %}
+
+{% if external_ca == true %}
+  {% set tmp = arguments.append('--external-ca --external-ca-type="generic"') %}                  
+{% endif %}
+
+{% if acme == true %}
+  {% set tmp = arguments.append('--random-serial-numbers') %}                  
+{% endif %}
+
+{% set install_cmd = '/usr/sbin/ipa-server-install ' %}
+
+{{ install_cmd }} {{ arguments |join(' ')}}
