@@ -18,8 +18,7 @@
   ansible.builtin.group:
     name: "{{ item }}"
     state: present   
-  loop:
-    - "{{ users }}"
+  loop: "{{ users }}"
 
 - name: create users
   ansible.builtin.user:
@@ -27,5 +26,4 @@
     group: "{{ item }}"
     state: present
     password: "{{ passwd }}"
-  loop:
-    - "{ users }"
+  loop: "{{ users }}"

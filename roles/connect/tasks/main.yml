@@ -16,4 +16,3 @@
 
 - import_tasks: 10-users.yml
   become: true
-  delegate_to: localhost
