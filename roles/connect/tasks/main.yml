@@ -14,18 +14,5 @@
 # You should have received a copy of the GNU General Public License v3 along with the IdM workshop. 
 # If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-- name: create groups
-  ansible.builtin.group:
-    name: "{{ item }}"
-    state: present   
-  loop:
-    - "{{ users }}"
-
-- name: create users
-  ansible.builtin.users:
-    name: "{{ item }}"
-    group: "{{ item }}"
-    state: present
-    password: "{{ passwd }}"
-  loop:
-    - "{ users }"
+- import_tasks: 10-users.hml
+  delegate_to: localhost

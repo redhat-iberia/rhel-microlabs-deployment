@@ -14,20 +14,18 @@
 # You should have received a copy of the GNU General Public License v3 along with the IdM workshop. 
 # If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-- name: open firewall ports for ipa server
-  ansible.posix.firewalld:
-    service: "{{ item }}"
-    state: enabled
-    permanent: true
-    immediate: true
-  loop: "{{ firewall_services }}"
+- name: create groups
+  ansible.builtin.group:
+    name: "{{ item }}"
+    state: present   
+  loop:
+    - "{{ users }}"
 
-- name: upgrade all rpms
-  ansible.builtin.dnf:
-    name: "*"
-    state: latest
-    
-- name: install ipa server rpms
-  ansible.builtin.dnf:
-    name: "{{ rpms_ipa }}"
-    state: latest
+- name: create users
+  ansible.builtin.users:
+    name: "{{ item }}"
+    group: "{{ item }}"
+    state: present
+    password: "{{ passwd }}"
+  loop:
+    - "{ users }"
