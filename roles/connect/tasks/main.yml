@@ -16,3 +16,6 @@
 
 - import_tasks: 10-users.yml
   become: true
+
+- import_tasks: 30-req-general.yml
+  become: true

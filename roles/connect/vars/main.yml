@@ -20,7 +20,8 @@ users: ['openscap', 'podman', 'imagemode']
 passwd: '$6$g/NEiafc1/U2H7aa$/.JP6RUc02vXwrTWEYM6DvruzChBt038/Rcy5wTyK84I0YB1SpiMP7kWMg0QN6dK0d/7uC2sfEEaOvgjpeuVL/'
 
 # GENERAL
-rpms_general: ['chrony', 'sos', 'net-tools', 'lsof', 'strace', 'tmux', 'telnet']
+rpms: ['chrony', 'sos', 'net-tools', 'lsof', 'strace', 'tmux', 'telnet', 'libvirt', 'virt-top', 'libguestfs-tools', 'virt-install', 'virt-viewer', 'cockpit', 'cockpit-machines']
+services: ['libvirtd', 'cockpit']
 
 # IPA SETTINGS
 domain: 'melmac.univ'

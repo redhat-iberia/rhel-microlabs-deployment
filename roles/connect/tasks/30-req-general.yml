@@ -16,21 +16,21 @@
 
 - name: install rpms
   ansible.builtin.dnf:
-    name: "{{ rpms_general }}"
+    name: "{{ rpms }}"
     state: latest
 
-- name: enable chronyd service
+- name: enable services
   ansible.builtin.systemd:
-    name: chronyd
+    name: "{{ services }}"
     state: started
-    masked: no
     enabled: true
+    masked: no
 
-- name: add ip address to all hosts to /etc/hosts
-  ansible.builtin.lineinfile:
-    dest: /etc/hosts
-    regexp: '.*{{ item }}$'
-    line: "{{ hostvars[item].ansible_default_ipv4['address'] }} {{ item }} {{ hostvars[item].ansible_hostname }}"
+- name: create directory for vm templates
+  ansible.builtin.file:
+    path: /var/lib/libvirt/images/templates
     state: present
-  when: hostvars[item].ansible_hostname is defined
-  loop: "{{ groups.all }}"
+    owner: root
+    group: root
+    mode: 0644
+    setype: virt_content_t
