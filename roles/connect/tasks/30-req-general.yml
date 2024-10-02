@@ -30,7 +30,7 @@
 - name: create directory for vm templates
   ansible.builtin.file:
     path: /var/lib/libvirt/images/templates
-    state: present
+    state: directory
     owner: root
     group: root
     mode: 0644
