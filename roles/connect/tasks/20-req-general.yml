@@ -42,6 +42,6 @@
     state: directory
     owner: qemu
     group: qemu
-    mode: 2774
+    mode: 0774
     setype: virt_image_t
   loop: "{{ users }}"

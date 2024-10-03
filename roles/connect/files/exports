@@ -1,1 +1,1 @@
-/imagemode     imagemode.lab.example.com/32(rw)
+/imagemode     192.168.122.202/32(rw)
