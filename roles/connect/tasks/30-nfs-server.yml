@@ -29,31 +29,31 @@
 - name: mask nfsv3 services
   ansible.builtin.systemd:
     name: "{{ item }}"
-    state: stopped
-    enabled: false
-    masked: yes
+    state: started
+    enabled: true
+    masked: no
   loop: 
     - "rpc-statd.service"
     - "rpcbind.service" 
     - "rpcbind.socket"
 
-- name: create users directory for vms
-  ansible.builtin.file:
-    path: /etc/systemd/system/nfs-mountd.service.d/
-    state: directory
-    owner: root
-    group: root
-    mode: 0644
-    setype: systemd_unit_file_t
+# - name: create users directory for vms
+#   ansible.builtin.file:
+#     path: /etc/systemd/system/nfs-mountd.service.d/
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: 0644
+#     setype: systemd_unit_file_t
 
-- name: configure nfs server not to listen to v3
-  ansible.builtin.copy:
-    src: v4only.conf
-    dest: /etc/systemd/system/nfs-mountd.service.d/v4only.conf
-    owner: root
-    group: root
-    mode: 0644
-    setype: systemd_unit_file_t
+# - name: configure nfs server not to listen to v3
+#   ansible.builtin.copy:
+#     src: v4only.conf
+#     dest: /etc/systemd/system/nfs-mountd.service.d/v4only.conf
+#     owner: root
+#     group: root
+#     mode: 0644
+#     setype: systemd_unit_file_t
 
 - name: nfs daemon reload
   ansible.builtin.systemd:
@@ -70,10 +70,17 @@
     mode: 0644
     setype: exports_t
 
-- name: mask nfsv3 services
+- name: start nfs server
   ansible.builtin.systemd:
     name: nfs-server
     state: started
     enabled: true
     masked: no
+
+#- name: open firewall ports for nfs
+#  ansible.posix.firewalld:
+#    service: nfs
+#    state: enabled
+#    permanent: true
+#    immediate: true
 
