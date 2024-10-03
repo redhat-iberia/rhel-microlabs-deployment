@@ -45,3 +45,21 @@
     mode: 0774
     setype: virt_image_t
   loop: "{{ users }}"
+
+- name: copy script to start vm
+  ansible.builtin.copy:
+    src: imagemode.sh
+    dest: /usr/local/bin/imagemode.sh
+    owner: root
+    group: root
+    mode: 0611
+    setype: bin_t
+
+- name: copy launcher to start vm (imageuser)
+  ansible.builtin.copy:
+    src: 'Launch VM.desktop'
+    dest: '/home/imagemode/.local/share/applications/Launch VM.desktop'
+    owner: imagemode
+    group: imagemode
+    mode: 0644
+    setype: user_home_t

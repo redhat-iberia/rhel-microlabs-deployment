@@ -77,10 +77,8 @@
     enabled: true
     masked: no
 
-#- name: open firewall ports for nfs
-#  ansible.posix.firewalld:
-#    service: nfs
-#    state: enabled
-#    permanent: true
-#    immediate: true
+#firewall-cmd --permanent --zone=libvirt --add-service={nfs,rpc-bind,mountd}
+#firewall-cmd --permanent --zone=libvirt -add-port={5555/tcp,5555/udp,6666/tcp,6666/udp}
+#firewall-cmd --permanent --zone=libvirt --add-port={5555/tcp,5555/udp,6666/tcp,6666/udp}
+#firewall-cmd --reload
 
