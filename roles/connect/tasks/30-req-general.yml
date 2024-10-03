@@ -38,7 +38,7 @@
 
 - name: create users directory for vms
   ansible.builtin.file:
-    path: /"{{ item }"
+    path: /"{{ item }}"
     state: directory
     owner: "{{ item }}"
     group: "{{ item }}"
