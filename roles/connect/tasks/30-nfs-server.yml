@@ -67,10 +67,4 @@
     state: started
     enabled: true
     masked: no
-
-- name: open firewall ports for nfs
-  ansible.posix.firewalld:
-    service: nfs
-    state: enabled
-    permanent: true
-    immediate: true
+    
