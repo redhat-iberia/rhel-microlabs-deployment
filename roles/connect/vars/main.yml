@@ -22,6 +22,7 @@ passwd: '$6$g/NEiafc1/U2H7aa$/.JP6RUc02vXwrTWEYM6DvruzChBt038/Rcy5wTyK84I0YB1Spi
 # GENERAL
 rpms: ['chrony', 'sos', 'net-tools', 'lsof', 'strace', 'tmux', 'telnet', 'libvirt', 'virt-top', 'libguestfs-tools', 'virt-install', 'virt-viewer', 'cockpit', 'cockpit-machines']
 services: ['libvirtd', 'cockpit']
+rpms_nfs_server: ['nfs-utils']
 
 # IPA SETTINGS
 domain: 'melmac.univ'
