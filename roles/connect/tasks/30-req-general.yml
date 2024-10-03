@@ -40,8 +40,8 @@
   ansible.builtin.file:
     path: /"{{ item }"
     state: directory
-    owner: "{{ item }"
-    group: "{{ item }"
+    owner: "{{ item }}"
+    group: "{{ item }}"
     mode: 0644
     setype: virt_image_t
   loop: "{{ users }}"
