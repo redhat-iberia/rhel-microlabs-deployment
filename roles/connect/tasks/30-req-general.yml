@@ -34,4 +34,14 @@
     owner: root
     group: root
     mode: 0644
-    setype: virt_content_t
+    setype: virt_image_t
+
+- name: create users directory for vms
+  ansible.builtin.file:
+    path: /"{{ item }"
+    state: directory
+    owner: "{{ item }"
+    group: "{{ item }"
+    mode: 0644
+    setype: virt_image_t
+  loop: "{{ users }}"
