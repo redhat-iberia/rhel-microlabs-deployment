@@ -20,10 +20,11 @@
     line: "{{ item }}"
     state: present
   loop:
-    - "192.168.122.100 registry  registry.melmac.univ"
-    - "192.168.122.202 imagemode imagemode.melmac.univ"
-    - "192.168.122.120 openscap  openscap.melmac.univ"
-    - "192.168.122.184 podman    podman.melmac.univ"
+    - "192.168.122.100 registry  registry.lab.melmac.univ"
+    - "192.168.122.202 imagemode imagemode.lab.melmac.univ"
+    - "192.168.122.120 openscap  openscap.lab.melmac.univ"
+    - "192.168.122.184 podman    podman.lab.melmac.univ"
+    - "192.168.122.203 imagemodetest imagemodetest.lab.melmac.univ"
 
 - name: install rpms
   ansible.builtin.dnf:
