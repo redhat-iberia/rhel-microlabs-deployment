@@ -14,6 +14,17 @@
 # You should have received a copy of the GNU General Public License v3 along with the IdM workshop. 
 # If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
+- name: configurar el fichero /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ item }}"
+    state: present
+  loop:
+    - "192.168.122.100 registry  registry.melmac.univ"
+    - "192.168.122.202 imagemode imagemode.melmac.univ"
+    - "192.168.122.120 openscap  openscap.melmac.univ"
+    - "192.168.122.184 podman    podman.melmac.univ"
+
 - name: install rpms
   ansible.builtin.dnf:
     name: "{{ rpms }}"
