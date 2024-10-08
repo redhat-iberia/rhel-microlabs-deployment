@@ -58,7 +58,7 @@
     setype: virt_image_t
   loop: "{{ users }}"
 
-- name: copy script to start vm
+- name: copy script to start vm (imagemode)
   ansible.builtin.copy:
     src: imagemode.sh
     dest: /usr/local/bin/imagemode.sh
@@ -67,6 +67,14 @@
     mode: 0611
     setype: bin_t
 
+- name: sudoers conf to start vm (imagemode)
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/imagemode
+    line: "{{ item }}"
+    state: present
+  loop:
+    - "/bin/bash /usr/local/bin/imagemode.sh"
+    
 - name: copy launcher to start vm (imageuser)
   ansible.builtin.copy:
     src: 'Launch VM.desktop'

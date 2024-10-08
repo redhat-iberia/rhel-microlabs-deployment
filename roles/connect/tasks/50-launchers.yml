@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 (c) José Ángel de Bustos Pérez 
 #   Author: José Ángel de Bustos Pérez <jadebustos@gmail.com>
 #
@@ -14,34 +13,10 @@
 # You should have received a copy of the GNU General Public License v3 along with the IdM workshop. 
 # If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 
-- name: create script for installation
-  ansible.builtin.template:
-    src: ipa-server-deploy.sh.j2
-    dest: /tmp/ipa-server-deploy.sh
-    mode: 0755
-  delegate_to: localhost
-
-- name: ipa server deployment
-  ansible.builtin.script:
-    cmd: /tmp/ipa-server-deploy.sh
-  register: deployment_log
-  ignore_errors: true
-
-- name: delete ipa server installation script
-  ansible.builtin.file:
-    path: /tmp/ipa-server-deploy.sh
-    state: absent  
-  delegate_to: localhost
-  ignore_errors:
-
-- name: deployment information
-  ansible.builtin.debug:
-    var: deployment_log
-
-- name: open firewall ports for dns
-  ansible.posix.firewalld:
-    service: "{{ item }}"
-    state: enabled
-    permanent: true
-    immediate: true
-  loop: "{{ firewall_dns }}"
+- name: sudoers conf to start vm (imagemode)
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/imagemode
+    line: "{{ item }}"
+    state: present
+  loop:
+    - "/bin/bash /usr/local/bin/imagemode.sh"
