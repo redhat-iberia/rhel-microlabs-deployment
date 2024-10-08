@@ -19,4 +19,4 @@
     line: "{{ item }}"
     state: present
   loop:
-    - "/bin/bash /usr/local/bin/imagemode.sh"
+    - "imagemode ALL=(root) NOPASSWD: /bin/bash /usr/local/bin/imagemode.sh"
