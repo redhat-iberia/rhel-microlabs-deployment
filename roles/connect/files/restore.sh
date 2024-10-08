@@ -1,7 +1,7 @@
 #!/bin/bash
 
-/usr/bin/sudo /usr/bin/virsh destroy image-mode
-/usr/bin/logger -p local4.info -t "User: "${USER} "Destroying image-mode vm - "$?
+/usr/bin/sudo /usr/bin/virsh destroy imagemode
+/usr/bin/logger -p local4.info -t "User: "${USER} "Destroying imagemode vm - "$?
 /usr/bin/sudo /usr/bin/virsh destroy image-mode-test
 /usr/bin/logger -p local4.info -t "User: "${USER} "Destroying image-mode-test vm - "$?
 /usr/bin/sudo /usr/bin/virsh destroy podman
@@ -16,8 +16,8 @@ case "${USER}" in
 	/usr/bin/logger -p local4.info -t "User: "${USER} "Restoring image-mode vm - "$?
 	/usr/bin/sudo /usr/bin/qemu-img convert -f qcow2 -O qcow2 -o lazy_refcounts=on /var/lib/libvirt/images/templates/image-mode-test.qcow2 /imagemode/image-mode-test.qcow2
 	/usr/bin/logger -p local4.info -t "User: "${USER} "Restoring image-mode-test vm - "$?
-	/usr/bin/sudo /usr/bin/virsh start image-mode
-	/usr/bin/logger -p local4.info -t "User: "${USER}"Starting image-mode vm - "$?
+	/usr/bin/sudo /usr/bin/virsh start imagemode
+	/usr/bin/logger -p local4.info -t "User: "${USER}"Starting imagemode vm - "$?
 	/usr/bin/chmod 0664 /imagemode/image-mode-test.qcow2
 	;;
 
