@@ -1,0 +1,66 @@
+---
+
+- name: rsyslog configuration
+  ansible.builtin.copy:
+    src: connect.conf
+    dest: /etc/rsyslog.d/
+    owner: root
+    group: root
+    mode: 0644
+    setype: syslog_conf_t
+
+- name: reload rsyslog configuration
+  ansible.builtin.systemd:
+    name: rsyslogd
+    state: restarted
+    enabled: true
+    masked: no
+
+- name: copy restore session script
+  ansible.builtin.copy:
+    src: restore.sh
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    mode: 0755
+    setype: bin_t
+
+- name: create autostart .config directory
+  ansible.builtin.file:
+    path: "/home/{{ item }}/.config"
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    setype: config_home_t
+  loop: "{{ users }}"
+
+- name: create autostart .config/autostart directory
+  ansible.builtin.file:
+    path: "/home/{{ item }}/.config/autostart"
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
+    setype: config_home_t
+  loop: "{{ users }}"
+
+- name: copy restore session script
+  ansible.builtin.copy:
+    src: restore.desktop
+    dest: "/home/{{ item }}/.config/autostart"
+    owner: root
+    group: root
+    mode: 0755
+    setype: bin_t 
+  loop: "{{ users }}"
+
+- name: sudoers configuration
+  ansible.builtin.template:
+    src: sudoers.j2
+    dest: "/etc/sudoers.d/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+    setype: etc_t
+  loop: "{{ users }}"

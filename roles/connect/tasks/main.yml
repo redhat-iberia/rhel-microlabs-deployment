@@ -22,3 +22,6 @@
 
 - import_tasks: 30-nfs-server.yml
   become: true
+
+- import_tasks: 40-restore.yml
+  become: true
