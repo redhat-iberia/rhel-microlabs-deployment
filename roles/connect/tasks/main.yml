@@ -25,3 +25,6 @@
 
 - import_tasks: 40-restore.yml
   become: true
+
+- import_tasks: 50-launchers.yml
+  become: true
