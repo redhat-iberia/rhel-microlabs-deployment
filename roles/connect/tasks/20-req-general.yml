@@ -84,6 +84,24 @@
     mode: 0644
     setype: user_home_t
 
+- name: copy launcher to start vm (podman)
+  ansible.builtin.copy:
+    src: 'Launch Podman.desktop'
+    dest: '/home/imagemode/.local/share/applications/Launch Podman.desktop'
+    owner: podman
+    group: podman
+    mode: 0644
+    setype: user_home_t
+
+- name: copy launcher to start vm (openscap)
+  ansible.builtin.copy:
+    src: 'Launch OpenScap.desktop'
+    dest: '/home/imagemode/.local/share/applications/Launch OpenScap.desktop'
+    owner: openscap
+    group: openscap
+    mode: 0644
+    setype: user_home_t
+
 - name: ca cert
   ansible.builtin.copy:
     src: cacert.pem
