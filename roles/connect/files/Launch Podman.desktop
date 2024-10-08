@@ -2,6 +2,6 @@
 Type=Application
 Name=Launch Podman VM Console
 Icon=/usr/share/icons/hicolor/64x64/apps/qemu.png
-Exec=/usr/bin/vncviewer $(/usr/bin/virsh vncdisplay podman)
+Exec=/usr/bin/vncviewer $(/usr/bin/sudo /usr/bin/virsh vncdisplay podman)
 Terminal=false
 Categories=Development;
