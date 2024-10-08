@@ -18,6 +18,7 @@ case "${USER}" in
 	/usr/bin/logger -p local4.info -t "User: "${USER} "Restoring image-mode-test vm - "$?
 	/usr/bin/sudo /usr/bin/virsh start image-mode
 	/usr/bin/logger -p local4.info -t "User: "${USER}"Starting image-mode vm - "$?
+	/usr/bin/chmod 0664 /imagemode/image-mode-test.qcow2
 	;;
 
 esac
