@@ -11,7 +11,7 @@
 
 - name: reload rsyslog configuration
   ansible.builtin.systemd:
-    name: rsyslogd
+    name: rsyslog
     state: restarted
     enabled: true
     masked: no
