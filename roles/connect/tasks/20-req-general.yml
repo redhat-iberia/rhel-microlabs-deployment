@@ -67,6 +67,16 @@
     mode: 0611
     setype: bin_t
 
+- name: touch sudoers files
+  ansible.builtin.file:
+    path: "/etc/sudoers.d/{{ item }}"
+    state: touch
+    owner: root
+    group: root
+    mode: 0644
+    setype: etc_t
+  loop: "{{ users }}"
+
 - name: sudoers conf to start vm (imagemode)
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/imagemode
