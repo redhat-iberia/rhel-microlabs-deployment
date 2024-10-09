@@ -20,28 +20,6 @@ users: ['openscap', 'podman', 'imagemode']
 passwd: '$6$g/NEiafc1/U2H7aa$/.JP6RUc02vXwrTWEYM6DvruzChBt038/Rcy5wTyK84I0YB1SpiMP7kWMg0QN6dK0d/7uC2sfEEaOvgjpeuVL/'
 
 # GENERAL
-rpms: ['chrony', 'sos', 'net-tools', 'lsof', 'strace', 'tmux', 'telnet', 'libvirt', 'virt-top', 'libguestfs-tools', 'virt-install', 'virt-viewer', 'cockpit', 'cockpit-machines', 'gnome-tweaks', 'tigervnc']
-services: ['libvirtd', 'cockpit']
+rpms: ['chrony', 'sos', 'net-tools', 'lsof', 'strace', 'tmux', 'telnet', 'libvirt', 'virt-top', 'libguestfs-tools', 'virt-install', 'virt-viewer', 'cockpit', 'cockpit-machines', 'gnome-tweaks', 'tigervnc', 'tuned']
+services: ['libvirtd', 'cockpit', 'tuned']
 rpms_nfs_server: ['nfs-utils']
-
-# IPA SETTINGS
-domain: 'melmac.univ'
-realm: 'MELMAC.UNIV'
-netbios: 'MELMAC'
-ds_password: 'redhat123'
-admin_password: 'redhat123'
-idstart: '60000'
-idmax: '79999'
-
-# --ip-address=$(hostname -i | awk -F' ' '{ print $1 }')
-
-# IPA SERVER
-firewall_services: ['freeipa-ldap', 'freeipa-ldaps']
-rpms_ipa: ['ipa-server']
-
-# DNS
-firewall_dns: ['dns']
-rpms_dns: ['ipa-server-dns']
-forwarder: '192.168.122.1'
-reverse_zone: '122.168.192.in-addr.arpa'
-zonemgr: "dns@{{ domain }}"
