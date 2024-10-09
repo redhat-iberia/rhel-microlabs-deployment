@@ -19,7 +19,6 @@ case "${USER}" in
 	/usr/bin/sudo /usr/bin/virsh start imagemode
 	/usr/bin/logger -p local4.info -t "User: "${USER}"Starting imagemode vm - "$?
 	/usr/bin/sudo /usr/bin/chmod 0664 /imagemode/image-mode-test.qcow2
-	/usr/bin/sudo /usr/bin/chown qemu:qemu /imagemode/image-mode-test.qcow2
 	;;
 
 	"openscap")
