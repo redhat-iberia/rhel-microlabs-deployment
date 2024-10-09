@@ -7,6 +7,8 @@
 {{ item }} ALL=(root) NOPASSWD: /usr/bin/qemu-img convert -f qcow2 -O qcow2 -o lazy_refcounts=on /var/lib/libvirt/images/templates/image-mode.qcow2 /imagemode/image-mode.qcow2
 {{ item }} ALL=(root) NOPASSWD: /usr/bin/qemu-img convert -f qcow2 -O qcow2 -o lazy_refcounts=on /var/lib/libvirt/images/templates/image-mode-test.qcow2 /imagemode/image-mode-test.qcow2
 {{ item }} ALL=(root) NOPASSWD: /usr/bin/virsh start imagemode
+{{ item }} ALL=(root) NOPASSWD: /usr/bin/chmod 0664 start /imagemode/image-mode-test.qcow2
+{{ item }} ALL=(root) NOPASSWD: /usr/bin/chown qemu:qemu /imagemode/image-mode-test.qcow2
 {% endif %}
 
 {% if item == 'openscap' %}
