@@ -35,7 +35,7 @@ So the **admin** user will have to be configured with a public key to be able to
 This ansible playbook will perform the following:
 
 1. File [roles/connect/tasks/10-users.yml](roles/connect/tasks/10-users.yml): It will create the users included in the **users** list in the [roles/connect/vars/mail.yml](roles/connect/vars/mail.yml) file. The user's password is **redhat** and can be changed in the **passwd** variable on the same file.
-1. File [roles/connect/tasks/20-req-general.yml](roles/connect/tasks/20-req-general.yml): I will configure some aspects for the virtual machines. The **/etc/hosts** file will be modified to include the virtual machines ip and names, so you will probably need to modify this.
+1. File [roles/connect/tasks/20-req-general.yml](roles/connect/tasks/20-req-general.yml): It will configure some aspects for the virtual machines. The **/etc/hosts** file will be modified to include the virtual machines ip and names, so you will probably need to modify this.
 1. File [roles/connect/tasks/30-nfs-server.yml](roles/connect/tasks/30-nfs-server.yml): A NFS server will be configured and a NFS shared will be configured. In this NFS share the image mode microlab will store the vm disk that will be created so the KVM in the laptop will be able to boot a VM from that qcow2 disk.
 1. File [roles/connect/tasks/40-restore.yml](roles/connect/tasks/40-restore.yml): This will create the scripts that will start/stop the microlab's VMs and restore them when the users perform login and logout.
 1. File [roles/connect/tasks/50-launchers.yml](roles/connect/tasks/50-launchers.yml): This will add the sudo privileges needed to start the VM that was created with image mode.
