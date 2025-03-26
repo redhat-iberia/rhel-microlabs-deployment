@@ -77,7 +77,11 @@
     enabled: true
     masked: no
 
-#firewall-cmd --permanent --zone=libvirt --add-service={nfs,rpc-bind,mountd}
-#firewall-cmd --permanent --zone=libvirt --add-port={5555/tcp,5555/udp,6666/tcp,6666/udp}
-#firewall-cmd --reload
+- name: firewall rules for nfs
+  ansible.builtin.command:
+    cmd: "{{ item }}"
+  loop:
+    - "/usr/bin/firewall-cmd --permanent --add-service={nfs,rpc-bind,mountd}"
+    - "/usr/bin/firewall-cmd --permanent --add-port={5555/tcp,5555/udp,6666/tcp,6666/udp}"
+    - "/usr/bin/firewall-cmd --reload"
 
